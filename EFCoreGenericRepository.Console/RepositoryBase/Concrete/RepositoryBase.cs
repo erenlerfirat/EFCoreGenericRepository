@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace EFCoreGenericRepository.Console.RepositoryBase.Concrete
 {
-    internal class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         private readonly DbContext _dataBaseContext;
 
@@ -138,10 +138,10 @@ namespace EFCoreGenericRepository.Console.RepositoryBase.Concrete
         {
             IQueryable<T> query = GetQueryable(predicate, include);
 
-            if (orderBy != null)
-            {
-                query = query.OrderBy(orderBy, orderDirection);
-            }
+            //if (orderBy != null)
+            //{
+            //    query = query.OrderBy(orderBy, orderDirection);
+            //}
 
             if (skip != null && skip.HasValue)
             {
