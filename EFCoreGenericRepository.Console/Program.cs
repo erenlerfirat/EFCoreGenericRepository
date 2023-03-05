@@ -1,47 +1,22 @@
 ﻿using Autofac;
 using EFCoreGenericRepository.Console;
+using EFCoreGenericRepository.Console.RepositoryBase;
+using EFCoreGenericRepository.Console.RepositoryBase.GenericRepository;
+using EFCoreGenericRepository.Console.Services;
+using Microsoft.EntityFrameworkCore;
 
 class Program
 {
     static void Main(string[] args)
-    {
-        //var container = ContainerConfig.Configure();
-        //using (var scope = container.BeginLifetimeScope())
-        //{
-        //    var app = scope.Resolve<IApplication>();
-        //    app.Run();
-        //}
-        var x = new Test();
-    }
-}
-public interface IApplication
-{
-    void Run();
-}
+    {        
+        var container = ContainerConfig.Configure();
+        using (var scope = container.BeginLifetimeScope())
+        {
+            var todoService = scope.Resolve<TodoService>();
+            
+            var data = todoService.GetPaginatedListAsync().Result.FirstOrDefault().TodoName;
 
-public interface IService
-{
-    void WriteInformation(string message);
-}
-
-public class Service : IService
-{
-    public void WriteInformation(string message)
-    {
-        Console.WriteLine(message);
-    }
-}
-
-public class Application : IApplication
-{
-    private readonly IService _service;
-    public Application(IService service)
-    {
-        _service = service;
-    }
-
-    public void Run()
-    {
-        _service.WriteInformation("Injected!");
+            Console.WriteLine("Data is : " + data);
+        }
     }
 }
