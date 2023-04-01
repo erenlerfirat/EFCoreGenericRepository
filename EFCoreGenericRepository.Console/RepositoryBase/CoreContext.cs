@@ -7,7 +7,7 @@ namespace EFCoreGenericRepository.Console.RepositoryBase
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            optionsBuilder.UseSqlServer(@"Server=DG-FERENLER\SQLEXPRESS;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;Application Name=Api");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

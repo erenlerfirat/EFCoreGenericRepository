@@ -14,7 +14,7 @@ class Program
         {
             var todoService = scope.Resolve<TodoService>();
             
-            var data = todoService.GetPaginatedListAsync().Result.FirstOrDefault().TodoName;
+            var data = todoService.GetPaginatedListAsync().Result?.FirstOrDefault()?.TodoName;
 
             Console.WriteLine("Data is : " + data);
         }
